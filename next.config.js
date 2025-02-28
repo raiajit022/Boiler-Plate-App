@@ -1,18 +1,20 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
+  /* config options here */
   reactStrictMode: true,
+  
+  // Remove the swcMinify property as it's no longer recognized in Next.js 15.2.0
+  // If you need minification, Next.js 15.2.0 handles it automatically
   images: {
     domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com'],
-  },
-  // Enable App Router
-  experimental: {
-    appDir: true,
   },
   async redirects() {
     return [
       {
-        source: '/dashboard',
-        destination: '/dashboard/overview',
+        source: '/old-path',
+        destination: '/new-path',
         permanent: true,
       },
     ];

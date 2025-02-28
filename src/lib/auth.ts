@@ -58,3 +58,11 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
+export function redirectToLogin(returnTo?: string) {
+  // Make sure we always have a valid string for redirect
+  const destination = returnTo || '/login';
+  
+  // When using this function, ensure destination is passed to router.push or similar functions
+  return destination;
+}

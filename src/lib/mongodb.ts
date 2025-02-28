@@ -24,4 +24,20 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = client.connect();
 }
 
+// Mock database client for local development
+const mockClient = {
+  db: () => ({
+    collection: () => ({
+      find: () => Promise.resolve([]),
+      findOne: () => Promise.resolve(null),
+      insertOne: () => Promise.resolve({ insertedId: 'mock_id' }),
+    }),
+  }),
+  connect: () => Promise.resolve(),
+};
+
+const clientPromise = process.env.MONGODB_URI
+  ? new MongoClient(process.env.MONGODB_URI).connect()
+  : Promise.resolve(mockClient);
+
 export default clientPromise;

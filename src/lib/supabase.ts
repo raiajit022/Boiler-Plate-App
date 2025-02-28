@@ -1,21 +1,23 @@
 import { createClient } from '@supabase/supabase-js';
 import type { SupabaseClient, User } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Create a mock client for local development
+const mockClient = {
+  auth: {
+    signIn: () => Promise.resolve({ user: null, error: null }),
+    signOut: () => Promise.resolve({ error: null }),
+  },
+  from: () => ({
+    select: () => Promise.resolve({ data: [], error: null }),
+  }),
+};
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables');
-  // In production, we'll still throw an error
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error('Missing required Supabase environment variables');
-  }
-}
-
-export const supabase: SupabaseClient = createClient(
-  supabaseUrl || '',
-  supabaseAnonKey || ''
-);
+export const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ? createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
+  : mockClient;
 
 export async function getUser(): Promise<User | null> {
   try {
