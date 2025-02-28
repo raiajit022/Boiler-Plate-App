@@ -1,84 +1,142 @@
-# My Next.js App
+# Next.js SaaS Boilerplate
 
-## Setup
+A modern, full-featured SaaS boilerplate built with Next.js, featuring authentication, payments, and analytics.
 
-To set up this project:
+## Tech Stack
 
-## Features
+- **Framework**: Next.js 15.2.0
+- **Authentication**: NextAuth.js with Google & Email providers
+- **Database**: MongoDB & Prisma
+- **Payment Processing**: Stripe
+- **Authentication & Storage**: Supabase
+- **Analytics**: Segment & Mixpanel
+- **Styling**: Tailwind CSS
+- **Form Handling**: React Hook Form
+- **Validation**: Zod
+- **State Management**: SWR
+- **UI Components**: Framer Motion
+- **TypeScript**: Yes
 
-- Next.js 13 with App Router
-- Supabase authentication
-- Stripe payments
-- Tailwind CSS for styling
-- TypeScript support
-- Form handling with React Hook Form
-- API validation with Zod
-- SEO optimized with Next SEO
+## Core Features
 
-## Installation
+- 🔐 Authentication (NextAuth.js, Supabase)
+- 💳 Subscription payments (Stripe)
+- 📊 Analytics tracking (Segment, Mixpanel)
+- 📧 Email handling (Nodemailer)
+- 🗄️ Database integration (MongoDB, Prisma)
+- 📝 Form validation
+- 🎨 Responsive UI components
+- 🔍 SEO optimization
 
-### Automatic Installation
+## Project Structure
 
-Run the install script:
-
-```bash
-chmod +x install.sh
-./install.sh
+```
+src/
+├── components/         # Reusable UI components
+├── lib/               # Core functionality
+│   ├── analytics.ts   # Analytics integration
+│   ├── auth.ts        # Authentication setup
+│   ├── db.ts          # Database client
+│   ├── email.ts       # Email service
+│   ├── logger.ts      # Logging utility
+│   ├── mongodb.ts     # MongoDB configuration
+│   ├── stripe.ts      # Stripe integration
+│   └── supabase.ts    # Supabase client
 ```
 
-### Manual Installation
+## Getting Started
 
-1. Install dependencies:
-
+1. Clone the repository
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Set up Tailwind CSS:
+3. Copy the environment variables:
+```bash
+cp .env.local.example .env.local
+```
+
+4. Configure your environment variables in `.env.local`:
+- Authentication (NextAuth, Google OAuth)
+- Database connections (MongoDB)
+- Supabase credentials
+- Stripe API keys
+- Analytics tokens (Segment, Mixpanel)
+- Email service configuration
+
+5. Run the development server:
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run setup` - Initial project setup
+- `npm run security-check` - Check for security vulnerabilities
+
+## Environment Variables
+
+Required environment variables:
 
 ```bash
-npx tailwindcss init -p
-```
+# Authentication
+NEXTAUTH_URL=
+NEXTAUTH_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-3. Create a `.env.local` file in the root directory with the following variables:
+# Database
+MONGODB_URI=
 
-```
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 
 # Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_WEBHOOK_SECRET=
 
-# Mailgun
-MAILGUN_API_KEY=
-MAILGUN_DOMAIN=
+# Email
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASSWORD=
+SMTP_FROM=
 
-# NextAuth
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=
+# Analytics
+NEXT_PUBLIC_SEGMENT_WRITE_KEY=
+NEXT_PUBLIC_MIXPANEL_TOKEN=
 ```
 
-## Development
+## Authentication
 
-Run the development server:
+The project supports multiple authentication methods:
+- Google OAuth
+- Magic Links (Email)
+- NextAuth.js integration
 
-```bash
-npm run dev
-```
+## Payment Integration
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Stripe integration is set up for:
+- Subscription management
+- One-time payments
+- Customer portal
+- Webhook handling
 
-## Building for Production
+## Contributing
 
-```bash
-npm run build
-npm run start
-```
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
-## Security Fixes
+## License
 
-If you encounter security vulnerabilities related to `mailgun-js` or other dependencies, you can run the fix script:
-```
+This project is licensed under the MIT License.
