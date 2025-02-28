@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com'],
   },
+  // Enable App Router
+  experimental: {
+    appDir: true,
+  },
   async redirects() {
     return [
       {

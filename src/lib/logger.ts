@@ -37,7 +37,14 @@ class Logger {
 
     // In production, you might want to send logs to a service like DataDog or Sentry
     if (process.env.NODE_ENV === 'production') {
-      // TODO: Implement production logging
+      if (level === 'error' && process.env.SENTRY_DSN) {
+        // Send to Sentry
+        Sentry.captureMessage(message, {
+          level: Sentry.Severity.Error,
+          extra: data,
+        });
+      }
+      // Add additional production logging services here
     }
   }
 

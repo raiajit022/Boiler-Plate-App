@@ -31,15 +31,15 @@ export async function POST(request: Request) {
       case 'checkout.session.completed':
         const checkoutSession = event.data.object as Stripe.Checkout.Session;
         // Process the successful checkout
-        console.log('Checkout completed:', checkoutSession.id);
-        // Add your business logic here
+        logger.info('Checkout completed', { sessionId: checkoutSession.id });
+        await handleCheckoutCompleted(checkoutSession);
         break;
         
       case 'payment_intent.succeeded':
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
         // Process the successful payment
-        console.log('Payment succeeded:', paymentIntent.id);
-        // Add your business logic here
+        logger.info('Payment succeeded', { paymentIntentId: paymentIntent.id });
+        await handlePaymentSucceeded(paymentIntent);
         break;
         
       // Add more event handlers as needed
